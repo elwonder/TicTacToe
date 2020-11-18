@@ -1,5 +1,8 @@
-package com.elwonder.xo.controller;
+package com.elwonder.xo;
 
+import com.elwonder.xo.controller.CurrentMoveController;
+import com.elwonder.xo.controller.MoveController;
+import com.elwonder.xo.controller.WinnerController;
 import com.elwonder.xo.model.Field;
 import com.elwonder.xo.model.Figure;
 import com.elwonder.xo.model.Game;
@@ -10,7 +13,7 @@ import com.elwonder.xo.view.ConsoleView;
 import java.awt.*;
 import java.util.Scanner;
 
-public class GameController {
+public class TicTacToeCLI {
 
     public static void main(String[] args) {
         Player firstPlayer = new Player("Bob", Figure.X);
@@ -36,7 +39,7 @@ public class GameController {
                 MoveController.applyFigure(
                         field,
                         new Point(in.nextInt(),
-                        in.nextInt()),
+                                in.nextInt()),
                         CurrentMoveController.currentMove(field));
                 System.out.println("Nice move!");
                 ConsoleView.showBoard(field);
@@ -54,3 +57,4 @@ public class GameController {
         System.out.println("Good bye!");
     }
 }
+
