@@ -23,33 +23,33 @@ public class WinnerController {
 
     private static Figure checkStraight(Field field) {
         for (int i = 0; i < field.getSize(); i++) {
-            StringBuilder row = new StringBuilder();
+            String row = "";
+            String column = "";
             for (int j = 0; j < field.getSize(); j++) {
-                if (field.getFigure(new Point(i, j))  != null) row.append(field.getFigure(new Point(i, j)).getValue());
+                Figure rowFigure = field.getFigure(new Point(i, j));
+                Figure columnFigure = field.getFigure(new Point(j, i));
+                if (rowFigure != null) row += rowFigure.getValue();
+                if (columnFigure != null) column += columnFigure.getValue();
             }
-            if (checkString(row.toString()) != null) return checkString(row.toString());
-        }
-        for (int i = 0; i < field.getSize(); i++) {
-            StringBuilder column = new StringBuilder();
-            for (int j = 0; j < field.getSize(); j++) {
-                if (field.getFigure(new Point(j, i))  != null) column.append(field.getFigure(new Point(j, i)).getValue());
-            }
-            if (checkString(column.toString()) != null) return checkString(column.toString());
+            if (checkString(row) != null) return checkString(row);
+            if (checkString(column) != null) return checkString(column);
         }
         return null;
     }
 
     private static Figure checkDiagonal(Field field) {
-        StringBuilder diagonal = new StringBuilder();
+        String diagonal = "";
         for (int i = 0; i < field.getSize(); i++) {
-            if (field.getFigure(new Point(i, i))  != null) diagonal.append(field.getFigure(new Point(i, i)).getValue());
+            Figure figure = field.getFigure(new Point(i, i));
+            if (figure != null) diagonal += figure.getValue();
         }
-        if (checkString(diagonal.toString()) != null) return checkString(diagonal.toString());
-        diagonal = new StringBuilder();
+        if (checkString(diagonal) != null) return checkString(diagonal);
+        diagonal = "";
         for (int i = field.getSize() - 1, j = 0; j < field.getSize(); i--, j++) {
-            if (field.getFigure(new Point(i, j))  != null) diagonal.append(field.getFigure(new Point(i, j)).getValue());
+            Figure figure = field.getFigure(new Point(i, j));
+            if (figure  != null) diagonal += figure.getValue();
         }
-        if (checkString(diagonal.toString()) != null) return checkString(diagonal.toString());
+        if (checkString(diagonal) != null) return checkString(diagonal);
         return null;
     }
 }
